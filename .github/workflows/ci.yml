@@ -18,3 +18,16 @@ jobs:
 
             - name: "Check node version"
               run: node --version
+
+            - name: "Cloning the repository"
+              uses: actions/checkout@v4
+              # also we can run linux command run: git clone <repo name>
+
+            - name: "Listing the directories"
+              run: ls
+
+            - name: "Installing React Dependencies"
+              run: npm install
+
+            - name: "Listing the directories"
+              run: ls
