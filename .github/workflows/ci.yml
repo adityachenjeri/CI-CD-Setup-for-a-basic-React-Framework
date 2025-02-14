@@ -31,3 +31,9 @@ jobs:
 
             - name: "Listing the directories"
               run: ls
+
+            - name: "Running the tests"
+              run: npx vitest --run --reporter=verbose
+
+            - name: "Run Build"
+              run: npm run build
