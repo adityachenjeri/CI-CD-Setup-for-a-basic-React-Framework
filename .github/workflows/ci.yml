@@ -33,7 +33,8 @@ jobs:
               run: ls
 
             - name: "Running the tests"
-              run: npx vitest --run --reporter=verbose
+              run: npm run test
+              #npx vitest --run --reporter=verbose
 
             - name: "Run Build"
               run: npm run build
