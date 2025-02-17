@@ -33,7 +33,7 @@ jobs:
               run: ls
               
             - name: "Upload Production Ready Built files"
-              run: actions/upload-artifact@v4 
+              uses: actions/upload-artifact@v4 
               with:
                 name: ProductionFolderName
                 path: dist
