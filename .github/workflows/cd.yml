@@ -22,14 +22,11 @@ jobs:
             - name: "setup Vercel CLI"
               run: npm install -g vercel
 
-            - name: "Debug run_id"
-              run: echo "Workflow Run ID: ${{ github.event.workflow_run.id }}"
-
             - name: "Download ProductionFolderFiles"
               uses: actions/download-artifact@v4
               with:
                 name: ProductionFolderName 
-                run_id: ${{ github.event.workflow_run.id }}
+                run-id: ${{ github.event.workflow_run.id }}
  #               #we have to also mention run id so that it identifies from which workflow the artifact should be downloaded
  #               github-token: ${#{ github.token }} #so that we could access toekns in the git repository
 
