@@ -1,0 +1,42 @@
+name: "CD Pipeline"
+
+on:
+    workflow_run:
+        workflows: ["Sample CI pipeline for React framework"]
+        types:
+            - completed
+
+    workflow-dispatch:
+
+jobs:
+    deploy: #name of the job
+        runs-on: ubuntu-latest
+        environment: Production
+        
+        steps:
+            - name: "Setup of Nodejs"  #for deploying the project in vercel we need to setup vercel CLI
+              uses: actions/setup-nodejs@v4 # So we have to setup nodejs for that
+              with:
+                node-version: '21'
+
+            - name: "setup Vercel CLI"
+              run: npm install -g vercel
+
+            - name: "Download ProductionFolderFiles"
+              uses: actions/download-artifact@v4
+              with:
+                name: ProductionFolderName 
+                run-id: ${{ github.event.workflow_run.id }}
+                #we have to also mention run id so that it identifies from which workflow the artifact should be downloaded
+                github-token: ${{ github.token }} #so that we could access toekns in the git repository
+
+            name: "Deploy to Vercel"
+            run: vercel --prod --token=${{ secrets.VERCEL_TOKEN_AD}} --name=cicdproject #we should also give the name of the project 
+#            run: vercel --prod --token=$VERCEL_TOKEN_AD --confirm
+#            env:
+#                VERCEL_TOKEN_AD: ${#{ secrets.VERCEL_TOKEN_AD }} This is mainly used to give access to a certian variables to our environment
+
+            
+
+    
+
