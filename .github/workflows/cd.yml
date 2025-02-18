@@ -28,10 +28,10 @@ jobs:
                 name: ProductionFolderName 
                 run-id: ${{ github.event.workflow_run.id }}
  #               #we have to also mention run id so that it identifies #from which workflow the artifact should be downloaded
- #               github-token: ${#{ github.token }} #so that we could access toekns in the git repository
+                github-token: ${{ github.token }} #so that we could access toekns in the git repository
 
             - name: "Deploy to Vercel"
-              run: vercel --prod --token=${{ secrets.VERCEL_TOKEN_AD}} --name=cicdproject #we should also give the name of the project 
+              run: vercel --prod --token=${{ secrets.VERCEL_TOKEN_AD}} --confirm --name=cicdproject #we should also give the name of the project 
 #             run: vercel --prod --token=$VERCEL_TOKEN_AD --confirm
 #             env:
 #                VERCEL_TOKEN_AD: ${#{ secrets.VERCEL_TOKEN_AD }} This is mainly used to give access to a certian variables to our environment
